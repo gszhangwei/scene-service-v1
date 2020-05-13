@@ -1,0 +1,10 @@
+azure:
+  blob-storage:
+    container-name: dev-diag
+
+server-domain: http://test-panorama.chinanorth.cloudapp.chinacloudapi.cn/#/v/
+hashids_salt: This is my VR SaaS product local Salt
+
+elastic:
+  index:
+    name: data-dev-panorama

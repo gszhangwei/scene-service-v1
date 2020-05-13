@@ -1,0 +1,9 @@
+CREATE TABLE `panorama` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `panorama_url` varchar(50) DEFAULT NULL,
+  `is_deleted` TINYINT(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+);

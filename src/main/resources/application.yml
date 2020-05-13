@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: panorama-backend
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/panorama?useSSL=false&characterEncoding=UTF-8&connectionCollation=utf8mb4_bin&characterEncoding=utf-8&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: root
+    hikari:
+      maxLifetime: 110000
+  jpa:
+    show-sql: true
+  profiles:
+    active: local
+  servlet:
+    multipart:
+      enabled: true
+      max-request-size: 20MB
+      max-file-size: 20MB
+
+es:
+  properties:
+    cluster_name: es-docker-cluster
+    cluster_host: es-dev-panorama.chinanorth.cloudapp.chinacloudapi.cn
+    tcp_port: 9300
+    user: es_panorama
+    password: espanorama
+    pkcs_transport_file_name: /cert/elastic-certificates.p12
+
+server-domain: http://test-panorama.chinanorth.cloudapp.chinacloudapi.cn/#/v/
+hashids_salt: This is my VR SaaS product local salt
+
+azure:
+  blob-storage:
+    base-path: https://panoramaproddiag.blob.core.chinacloudapi.cn
+    connection-format: DefaultEndpointsProtocol=https;AccountName=%s;AccountKey=%s;EndpointSuffix=core.chinacloudapi.cn
+    account-name: panoramaproddiag
+    account-key: b5uvrRh9qZE4fJpBly8PRvSmk0tuVu75M6mCH5+GOHNYJxG7VjacgAFk0ldEZa0C25TQKEhgKDqXK297X36H0Q==
+
+static-file:
+  static-file-type-limit:
+    - image/jpeg
+    - image/jpg
+    - image/bmp
+    - image/png
+    - image/gif
+
+logging:
+  dir: logs
+
+logstash:
+  host: es-dev-panorama.chinanorth.cloudapp.chinacloudapi.cn:4560
+
