@@ -49,6 +49,11 @@ repositories {
 
 dependencies {
 
+    def lombokVersion = '1.18.4'
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
