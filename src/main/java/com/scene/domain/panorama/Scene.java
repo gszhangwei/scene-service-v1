@@ -4,8 +4,13 @@ import com.scene.domain.core.IEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Columns;
 import org.springframework.lang.Nullable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.Map;
 
@@ -13,23 +18,14 @@ import java.util.Map;
 @AllArgsConstructor
 @Data
 public class Scene implements IEntity {
-    @Nullable
     private Long id;
-    @Nullable
     private Long panoramaId;
-    @Nullable
     private String name;
-    @Nullable
     private SceneType type;
-    @Nullable
     private Boolean isInitialShow;
-    @Nullable
     private Boolean isDeleted;
-    @Nullable
     private Map<String, PhotoInfo> photos;
-    @Nullable
     private Date createTime;
-    @Nullable
     private Date updateTime;
 
     public Scene update(Scene updatedScene, Date now) {

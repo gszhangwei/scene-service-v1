@@ -4,8 +4,18 @@ import com.scene.domain.core.IAggregateRoot;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.lang.Nullable;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
 import java.util.Date;
@@ -18,19 +28,12 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Data
 public class Panorama implements IAggregateRoot {
-    @Nullable
     private Long id;
-    @Nullable
     private String name;
-    @NotNull
     private List<Scene> scenes;
-    @Nullable
     private Boolean isDeleted;
-    @Nullable
     private String panoramaUrl;
-    @Nullable
     private Date createTime;
-    @Nullable
     private Date updateTime;
 
     public Panorama update(Panorama updatedPanorama) {

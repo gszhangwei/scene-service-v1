@@ -11,7 +11,6 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Data
 public class PhotoInfo implements IEntity {
-    @NotNull
     private String photoUrl;
     private boolean isInitialShow;
 }
