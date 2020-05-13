@@ -15,6 +15,14 @@ public final class StaticFileService implements IDomainService {
 
     private final IFileTypeRepo iFileTypeRepo;
 
+    public UploadFileResult uploadFile(byte[] data) throws MimeTypeException {
+        checkFileLegality(data);
+        String fileName = generateFileName(data);
+        StaticFileInfo fileInfo = new StaticFileInfo(fileName, FileUtils.getFileContentType(fileName));
+        iStorageClient.uploadFile(data, fileInfo);
+        return new UploadFileResult(fileInfo.getName(), iStorageClient.getFilePath(fileName));
+    }
+
     private String generateFileName(byte[] data) throws MimeTypeException {
         return String.format("%s%s", UUID.randomUUID().toString(), FileUtils.getFileExtension(data));
     }

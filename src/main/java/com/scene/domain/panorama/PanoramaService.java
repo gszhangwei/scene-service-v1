@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hashids.Hashids;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,17 +13,16 @@ import java.util.Objects;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 @Service
+@AllArgsConstructor
 public class PanoramaService implements IDomainService {
 
     private final int ID_LENGTH = 7;
 
-    private String salt;
+    private final IPanoramaRepository panoramaRepository;
 
-    @Autowired
-    private IPanoramaRepository panoramaRepository;
+    private final ISearchPanoramaRepository searchPanoramaRepository;
 
-    @Autowired
-    private ISearchPanoramaRepository searchPanoramaRepository;
+    private final String salt;
 
     public String createPanorama(Panorama panorama) {
         Panorama savedPanorama = panoramaRepository.save(panorama);
@@ -64,10 +62,14 @@ public class PanoramaService implements IDomainService {
         return Math.max(offset, 0);
     }
 
+    public Panorama get(String url) {
+        return panoramaRepository.findOneByUrl(url).get(0);
+    }
+
     @AllArgsConstructor
     @NoArgsConstructor
     @Data
-    static class PanoramaSearchResult {
+    public static class PanoramaSearchResult {
         private Long count;
         private List<Panorama> panoramas;
     }
