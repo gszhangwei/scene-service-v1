@@ -23,9 +23,9 @@ es:
     cluster_name: es-docker-cluster
     cluster_host: es-dev-panorama.chinanorth.cloudapp.chinacloudapi.cn
     tcp_port: 9300
-    user: es_panorama
-    password: espanorama
-    pkcs_transport_file_name: /cert/elastic-certificates.p12
+    user: xxxx
+    password: xxxx
+    pkcs_transport_file_name: /cert/xxxx.p12
 
 server-domain: http://test-panorama.chinanorth.cloudapp.chinacloudapi.cn/#/v/
 hashids_salt: This is my VR SaaS product local salt
@@ -35,7 +35,7 @@ azure:
     base-path: https://panoramaproddiag.blob.core.chinacloudapi.cn
     connection-format: DefaultEndpointsProtocol=https;AccountName=%s;AccountKey=%s;EndpointSuffix=core.chinacloudapi.cn
     account-name: panoramaproddiag
-    account-key: b5uvrRh9qZE4fJpBly8PRvSmk0tuVu75M6mCH5+GOHNYJxG7VjacgAFk0ldEZa0C25TQKEhgKDqXK297X36H0Q==
+    account-key: xxxxxx
 
 static-file:
   static-file-type-limit:
