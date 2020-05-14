@@ -4,7 +4,9 @@ import com.scene.domain.file.IFileTypeRepo;
 import com.scene.domain.file.IStorageClient;
 import com.scene.domain.file.StaticFileService;
 import org.apache.tika.mime.MimeTypeException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class FileApplicationService implements IApplicationService {
     private final IStorageClient iStorageClient;
     private final IFileTypeRepo iFileTypeRepo;

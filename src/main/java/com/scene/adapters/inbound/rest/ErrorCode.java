@@ -4,6 +4,8 @@ import com.scene.domain.core.BizException;
 import com.scene.domain.file.InvalidFileTypeException;
 import lombok.Getter;
 
+import java.util.Objects;
+
 @Getter
 public enum ErrorCode {
     INVALID_FILE_TYPE(1001, "The type of upload file is not permitted"),
@@ -22,6 +24,6 @@ public enum ErrorCode {
 
     public static ErrorCode errorCode(BizException bizException) {
         Class<? extends BizException> exceptionClass = bizException.getClass();
-        return exceptionClass.isInstance(InvalidFileTypeException.class) ? ErrorCode.INVALID_FILE_TYPE : ErrorCode.GENERAL_ERROR;
+        return Objects.equals(InvalidFileTypeException.class, exceptionClass) ? ErrorCode.INVALID_FILE_TYPE : ErrorCode.GENERAL_ERROR;
     }
 }

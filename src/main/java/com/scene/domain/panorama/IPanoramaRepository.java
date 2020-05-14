@@ -1,12 +1,11 @@
 package com.scene.domain.panorama;
 
 import com.scene.domain.core.IRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-//Todo deleted when implementation has been completed
-@Repository
+@Component
 public interface IPanoramaRepository extends IRepository {
     Panorama save(Panorama panorama);
 
