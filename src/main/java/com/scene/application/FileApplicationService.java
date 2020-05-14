@@ -16,7 +16,7 @@ public class FileApplicationService implements IApplicationService {
         this.staticFileService = new StaticFileService(iStorageClient, iFileTypeRepo);
     }
 
-    public void uploadFile(byte[] data) throws MimeTypeException {
-        staticFileService.uploadFile(data);
+    public StaticFileService.UploadFileResult uploadFile(byte[] data) throws MimeTypeException {
+        return staticFileService.uploadFile(data);
     }
 }
