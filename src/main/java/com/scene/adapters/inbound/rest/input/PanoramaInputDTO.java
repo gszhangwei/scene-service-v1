@@ -58,7 +58,7 @@ public class PanoramaInputDTO {
     @AllArgsConstructor
     @NoArgsConstructor
     @Data
-    private static class PhotoInputDTO {
+    public static class PhotoInputDTO {
         @NotNull
         private String photoUrl;
         private boolean isInitialShow;
