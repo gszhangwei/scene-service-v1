@@ -167,7 +167,7 @@ public class PanoramaControllerTest {
 
     @Test
     public final void should_valid_scene_photos_is_empty_when_create_panorama() throws Exception {
-        PanoramaInputDTO.SceneInputDTO sceneInputDTO = new PanoramaInputDTO.SceneInputDTO("", SceneType.ENVIRONMENT, true, new HashMap<>());
+        PanoramaInputDTO.SceneInputDTO sceneInputDTO = new PanoramaInputDTO.SceneInputDTO("场景1", SceneType.ENVIRONMENT, true, new HashMap<>());
         PanoramaInputDTO panoramaInputDTO = new PanoramaInputDTO("全景", singletonList(sceneInputDTO));
 
         MockHttpServletResponse response = this.mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/panoramas")
