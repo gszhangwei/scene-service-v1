@@ -1,6 +1,6 @@
 package com.scene.domain.panorama;
 
-import com.scene.domain.core.IDomainService;
+import com.scene.domain.core.DomainService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,13 +14,13 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 @Service
 @AllArgsConstructor
-public class PanoramaService implements IDomainService {
+public class PanoramaService implements DomainService {
 
     private final int ID_LENGTH = 7;
 
-    private final IPanoramaRepository panoramaRepository;
+    private final PanoramaRepository panoramaRepository;
 
-    private final ISearchPanoramaRepository searchPanoramaRepository;
+    private final SearchPanoramaRepository searchPanoramaRepository;
 
     private final String salt;
 

@@ -1,6 +1,6 @@
 package com.scene.adapters.outbound.sqlstorage.panorama;
 
-import com.scene.domain.panorama.IPanoramaRepository;
+import com.scene.domain.panorama.PanoramaRepository;
 import com.scene.domain.panorama.Panorama;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Repository
-public class PanoramaRepoImpl implements IPanoramaRepository {
+public class PanoramaRepoImpl implements PanoramaRepository {
 
     private final PanoramaJpaRepo panoramaJpaRepo;
 

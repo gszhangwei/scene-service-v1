@@ -38,10 +38,10 @@ public class PanoramaServiceTest {
     private PanoramaService panoramaService;
 
     @Mock
-    private IPanoramaRepository iPanoramaRepository;
+    private PanoramaRepository panoramaRepository;
 
     @Mock
-    private ISearchPanoramaRepository iSearchPanoramaRepository;
+    private SearchPanoramaRepository searchPanoramaRepository;
 
     @Captor
     private ArgumentCaptor<Panorama> captor;
@@ -106,12 +106,12 @@ public class PanoramaServiceTest {
     @Before
     public void setup() {
         panoramaService = new PanoramaService(
-                iPanoramaRepository,
-                iSearchPanoramaRepository,
+                panoramaRepository,
+                searchPanoramaRepository,
                 "This is VR SaaS salt"
         );
 
-        Mockito.when(iPanoramaRepository.save(any(Panorama.class))).thenAnswer(
+        Mockito.when(panoramaRepository.save(any(Panorama.class))).thenAnswer(
                 (Answer<Panorama>) invocation -> {
                     Panorama panorama = (Panorama) invocation.getArguments()[0];
                     if (Objects.isNull(panorama.getId())) {
@@ -129,7 +129,7 @@ public class PanoramaServiceTest {
 
         PanoramaInputDTO panoramaInputDTO = new PanoramaInputDTO("全景", Collections.singletonList(sceneInputDTO));
         String createPanorama = panoramaService.createPanorama(panoramaInputDTO.toDomainObject());
-        Mockito.verify(iPanoramaRepository, times(2)).save(captor.capture());
+        Mockito.verify(panoramaRepository, times(2)).save(captor.capture());
         Panorama panorama = captor.getValue();
         assertNotNull(createPanorama);
         assertNotNull(panorama);
@@ -142,8 +142,8 @@ public class PanoramaServiceTest {
 
     @Test
     public void should_find_all_panoramas_by_page_and_size() {
-        Mockito.when(iPanoramaRepository.findByPage(anyInt(), anyInt())).thenReturn(asList(benzPano, bmwPano));
-        Mockito.when(iPanoramaRepository.countByPage()).thenReturn(2L);
+        Mockito.when(panoramaRepository.findByPage(anyInt(), anyInt())).thenReturn(asList(benzPano, bmwPano));
+        Mockito.when(panoramaRepository.countByPage()).thenReturn(2L);
         PanoramaService.PanoramaSearchResult result = panoramaService.searchPanoramas("", 0, 1);
         assertNotNull(result);
 
@@ -155,7 +155,7 @@ public class PanoramaServiceTest {
 
     @Test
     public void should_search_panorama_by_name() {
-        Mockito.when(iSearchPanoramaRepository.findAllByNameAndIsDeletedFalse(anyString(), anyInt(), anyInt()))
+        Mockito.when(searchPanoramaRepository.findAllByNameAndIsDeletedFalse(anyString(), anyInt(), anyInt()))
                 .thenReturn(new PanoramaService.PanoramaSearchResult(1L, Collections.singletonList(bmwPano)));
         PanoramaService.PanoramaSearchResult result = panoramaService.searchPanoramas("bmw", 1, 1);
         assertNotNull(result);
@@ -167,7 +167,7 @@ public class PanoramaServiceTest {
 
     @Test
     public void should_get_panorama_by_url() {
-        Mockito.when(iPanoramaRepository.findOneByUrl(benzPano.getPanoramaUrl())).thenReturn(Collections.singletonList(benzPano));
+        Mockito.when(panoramaRepository.findOneByUrl(benzPano.getPanoramaUrl())).thenReturn(Collections.singletonList(benzPano));
         Panorama result = panoramaService.get(benzPano.getPanoramaUrl());
         assertNotNull(result);
         assertEquals(benzPano.getName(), result.getName());
@@ -179,13 +179,13 @@ public class PanoramaServiceTest {
 
     @Test
     public void should_delete_panorama_by_id() {
-        Mockito.when(iPanoramaRepository.findById(anyLong())).thenReturn(benzPano);
+        Mockito.when(panoramaRepository.findById(anyLong())).thenReturn(benzPano);
 
         if (Objects.nonNull(benzPano.getId())) {
             panoramaService.deletePanorama(benzPano.getId());
         }
 
-        Mockito.verify(iPanoramaRepository, times(1)).save(captor.capture());
+        Mockito.verify(panoramaRepository, times(1)).save(captor.capture());
         Panorama panorama = captor.getValue();
         assertNotNull(panorama);
         assertTrue(panorama.getIsDeleted());
@@ -231,10 +231,10 @@ public class PanoramaServiceTest {
                 new SimpleDateFormat("yyyy-MM-dd").parse("2020-4-29")
         );
 
-        Mockito.when(iPanoramaRepository.findById(benzPano.getId())).thenReturn(benzPano);
+        Mockito.when(panoramaRepository.findById(benzPano.getId())).thenReturn(benzPano);
         panoramaService.updatePanorama(benzPano.getId(), updatedBenzPano);
 
-        Mockito.verify(iPanoramaRepository, times(1)).save(captor.capture());
+        Mockito.verify(panoramaRepository, times(1)).save(captor.capture());
         Panorama value = captor.getValue();
         assertEquals(benzPano.getId(), value.getId());
         assertEquals(updatedBenzPano.getName(), value.getName());

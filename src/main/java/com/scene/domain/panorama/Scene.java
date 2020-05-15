@@ -1,6 +1,6 @@
 package com.scene.domain.panorama;
 
-import com.scene.domain.core.IEntity;
+import com.scene.domain.core.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +11,7 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Scene implements IEntity {
+public class Scene implements Entity {
     private Long id;
     private Long panoramaId;
     private String name;

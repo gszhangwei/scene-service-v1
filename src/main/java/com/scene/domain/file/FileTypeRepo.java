@@ -1,11 +1,11 @@
 package com.scene.domain.file;
 
-import com.scene.domain.core.IRepository;
+import com.scene.domain.core.Repository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public interface IFileTypeRepo extends IRepository {
+public interface FileTypeRepo extends Repository {
     public List<String> getWhitelist();
 }

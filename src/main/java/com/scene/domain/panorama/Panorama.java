@@ -1,6 +1,6 @@
 package com.scene.domain.panorama;
 
-import com.scene.domain.core.IAggregateRoot;
+import com.scene.domain.core.AggregateRoot;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Panorama implements IAggregateRoot {
+public class Panorama implements AggregateRoot {
     private Long id;
     private String name;
     private List<Scene> scenes;

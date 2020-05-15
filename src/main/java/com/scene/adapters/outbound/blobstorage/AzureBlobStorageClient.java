@@ -4,7 +4,7 @@ import com.microsoft.azure.storage.CloudStorageAccount;
 import com.microsoft.azure.storage.StorageException;
 import com.microsoft.azure.storage.blob.CloudBlobClient;
 import com.microsoft.azure.storage.blob.CloudBlockBlob;
-import com.scene.domain.file.IStorageClient;
+import com.scene.domain.file.StorageClient;
 import com.scene.domain.file.StaticFileInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,7 @@ import java.security.InvalidKeyException;
 
 @Slf4j
 @Component
-public class AzureBlobStorageClient implements IStorageClient {
+public class AzureBlobStorageClient implements StorageClient {
 
     private static final int ZERO_UPDATE_DATA_OFFSET = 0;
 

@@ -1,7 +1,7 @@
 package com.scene.application;
 
-import com.scene.domain.panorama.IPanoramaRepository;
-import com.scene.domain.panorama.ISearchPanoramaRepository;
+import com.scene.domain.panorama.PanoramaRepository;
+import com.scene.domain.panorama.SearchPanoramaRepository;
 import com.scene.domain.panorama.Panorama;
 import com.scene.domain.panorama.PanoramaService;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,19 +11,19 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class PanoramaApplicationService {
 
-    private final IPanoramaRepository iPanoramaRepository;
+    private final PanoramaRepository panoramaRepository;
 
-    private final ISearchPanoramaRepository iSearchPanoramaRepository;
+    private final SearchPanoramaRepository searchPanoramaRepository;
 
     private final PanoramaService panoramaService;
 
     private final String salt;
 
-    public PanoramaApplicationService(IPanoramaRepository iPanoramaRepository, ISearchPanoramaRepository iSearchPanoramaRepository, @Value("${file.disclaimer}") String salt) {
-        this.iPanoramaRepository = iPanoramaRepository;
-        this.iSearchPanoramaRepository = iSearchPanoramaRepository;
+    public PanoramaApplicationService(PanoramaRepository panoramaRepository, SearchPanoramaRepository searchPanoramaRepository, @Value("${file.disclaimer}") String salt) {
+        this.panoramaRepository = panoramaRepository;
+        this.searchPanoramaRepository = searchPanoramaRepository;
         this.salt = salt;
-        this.panoramaService = new PanoramaService(this.iPanoramaRepository, this.iSearchPanoramaRepository, salt);
+        this.panoramaService = new PanoramaService(this.panoramaRepository, this.searchPanoramaRepository, salt);
     }
 
     @Transactional

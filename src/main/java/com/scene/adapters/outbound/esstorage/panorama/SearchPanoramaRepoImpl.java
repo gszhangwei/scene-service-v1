@@ -1,6 +1,6 @@
 package com.scene.adapters.outbound.esstorage.panorama;
 
-import com.scene.domain.panorama.ISearchPanoramaRepository;
+import com.scene.domain.panorama.SearchPanoramaRepository;
 import com.scene.domain.panorama.Panorama;
 import com.scene.domain.panorama.PanoramaService;
 import lombok.Data;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Repository
 @Data
-public class SearchPanoramaRepoImpl implements ISearchPanoramaRepository {
+public class SearchPanoramaRepoImpl implements SearchPanoramaRepository {
 
     @Autowired
     @NotNull

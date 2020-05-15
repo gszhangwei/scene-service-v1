@@ -1,16 +1,14 @@
 package com.scene.domain.panorama;
 
-import com.scene.domain.core.IEntity;
+import com.scene.domain.core.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class PhotoInfo implements IEntity {
+public class PhotoInfo implements Entity {
     private String photoUrl;
     private boolean isInitialShow;
 }
