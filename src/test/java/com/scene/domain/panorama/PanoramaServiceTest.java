@@ -254,7 +254,7 @@ public class PanoramaServiceTest {
         assertFalse(capturedUpdatedScene.getIsDeleted());
         assertEquals(updatedScene.getPhotos().size(), capturedUpdatedScene.getPhotos().size());
         assertEquals(originUpdatedScene.getCreateTime(), capturedUpdatedScene.getCreateTime());
-        assertNotEquals(new SimpleDateFormat("yyyy-MM-dd").parse("2020-4-28"), capturedUpdatedScene.getUpdateTime());
+        assertNotEquals(originUpdatedScene.getUpdateTime(), capturedUpdatedScene.getUpdateTime());
 
         Scene capturedDeletedScene = value.getScenes().stream()
                 .filter(scene -> scene.getId().intValue() == 2).findFirst().get();
@@ -262,7 +262,7 @@ public class PanoramaServiceTest {
                 .filter(scene -> scene.getId().intValue() == 2).findFirst().get();
 
         assertTrue(capturedDeletedScene.getIsDeleted());
-        assertNotEquals(new SimpleDateFormat("yyyy-MM-dd").parse("2020-4-28"), capturedDeletedScene.getUpdateTime());
+        assertNotEquals(originDeletedScene.getUpdateTime(), capturedDeletedScene.getUpdateTime());
 
         Scene capturedNewScene = value.getScenes().stream()
                 .filter(scene -> scene.getId().intValue() == 3).findFirst().get();
