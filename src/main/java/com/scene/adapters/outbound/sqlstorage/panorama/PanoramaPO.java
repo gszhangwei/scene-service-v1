@@ -3,6 +3,7 @@ package com.scene.adapters.outbound.sqlstorage.panorama;
 import com.scene.adapters.outbound.sqlstorage.core.IPersistenceObject;
 import com.scene.domain.panorama.Panorama;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.CascadeType;
@@ -22,6 +23,7 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class PanoramaPO implements IPersistenceObject<Panorama> {
     @Id

@@ -46,25 +46,6 @@ public class PanoramaController {
         return this.getUrlPrefix() + this.getPanoramaService().updatePanorama(panoramaId, panoramaUpdateInputDTO.toDomainObject());
     }
 
-    @GetMapping
-    public PanoramaSearchOutputDTO searchPanoramaList(@RequestParam(required = false) String name, @RequestParam int pageNumber, @RequestParam int pageSize) {
-        PanoramaService.PanoramaSearchResult panoramaSearchResult = panoramaService.searchPanoramas(name, pageNumber, pageSize);
-        return new PanoramaSearchOutputDTO(panoramaSearchResult.getCount(),
-                panoramaSearchResult.getPanoramas()
-                        .stream()
-                        .map(panorama -> PanoramaOutputDTO.of(panorama, urlPrefix))
-                        .collect(Collectors.toList()));
-    }
-
-    @GetMapping({"/{url}"})
-    public PanoramaDetailOutputDTO getByUrl(@PathVariable("url") String url) {
-        Panorama panorama = panoramaService.get(url);
-        if (Objects.isNull(panorama)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-        return PanoramaDetailOutputDTO.of(panorama);
-    }
-
     @DeleteMapping({"/{panoramaId}"})
     public void deletePanorama(@PathVariable("panoramaId") long panoramaId) {
         this.getPanoramaService().deletePanorama(panoramaId);

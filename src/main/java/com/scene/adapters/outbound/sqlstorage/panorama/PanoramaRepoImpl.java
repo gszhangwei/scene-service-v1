@@ -27,38 +27,4 @@ public class PanoramaRepoImpl implements PanoramaRepository {
     public Panorama findById(long id) {
         return Objects.requireNonNull(panoramaJpaRepo.findById(id).orElse(null)).toDomainObject();
     }
-
-    @Override
-    public List<Panorama> searchByName(String name, int page, int size) {
-        return panoramaJpaRepo.searchByName(name, page, size)
-                .stream()
-                .map(PanoramaPO::toDomainObject)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public long countByName(String name) {
-        return panoramaJpaRepo.countByName(name);
-    }
-
-    @Override
-    public List<Panorama> findByPage(int page, int size) {
-        return panoramaJpaRepo.findByPage(page, size)
-                .stream()
-                .map(PanoramaPO::toDomainObject)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<Panorama> findOneByUrl(String url) {
-        return panoramaJpaRepo.findOneByUrl(url)
-                .stream()
-                .map(PanoramaPO::toDomainObject)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public long countByPage() {
-        return panoramaJpaRepo.countByPage();
-    }
 }

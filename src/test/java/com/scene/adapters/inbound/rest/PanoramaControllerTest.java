@@ -40,54 +40,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class PanoramaControllerTest {
     @Autowired
     private MockMvc mockMvc;
-    @MockBean
-    private PanoramaApplicationService panoramaService;
-    @Value("${server-domain}")
-    private String urlPrefix;
-
-    @Test
-    public final void should_search_panorama_list() throws Exception {
-        when(panoramaService.searchPanoramas(null, 1, 30)).thenReturn(new PanoramaService.PanoramaSearchResult(1L, singletonList(getPanorama())));
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/panoramas?pageNumber=1&pageSize=30"))
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.total", is(1)))
-                .andExpect(jsonPath("$.panoramas").isArray())
-                .andExpect(jsonPath("$.panoramas").isNotEmpty())
-                .andExpect(jsonPath("$.panoramas[0].id", is(1)))
-                .andExpect(jsonPath("$.panoramas[0].name", is("Benz")))
-                .andExpect(jsonPath("$.panoramas[0].panoramaUrl", is(urlPrefix + "74gonwE")));
-    }
-
-    @Test
-    public final void should_get_panorama_by_url() throws Exception {
-        String url = "74gonwE";
-        when(panoramaService.get(url)).thenReturn(getPanorama());
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/panoramas/" + url))
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.name", is("Benz")))
-                .andExpect(jsonPath("$.scenes").isArray())
-                .andExpect(jsonPath("$.scenes").isNotEmpty())
-                .andExpect(jsonPath("$.scenes[0].id", is(1)))
-                .andExpect(jsonPath("$.scenes[0].name", is("Benz 0")))
-                .andExpect(jsonPath("$.scenes[0].type", is("ENVIRONMENT")))
-                .andExpect(jsonPath("$.scenes[0].default", is(true)))
-                .andExpect(jsonPath("$.scenes[0].photos").isMap())
-                .andExpect(jsonPath("$.scenes[0].photos.0.url", is("url0")))
-                .andExpect(jsonPath("$.scenes[0].photos.0.default", is(true)))
-                .andExpect(jsonPath("$.scenes[0].photos.1.url", is("url1")));
-    }
-
-    @Test
-    public final void should_return_404_when_panorama_not_found() throws Exception {
-        String url = "74gonwE";
-        when(panoramaService.get(url)).thenReturn(null);
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/panoramas/" + url))
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isNotFound());
-    }
 
     @Test
     public final void should_valid_panorama_name_is_blank_when_create_panorama() throws Exception {

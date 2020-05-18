@@ -40,9 +40,6 @@ public class PanoramaServiceTest {
     @Mock
     private PanoramaRepository panoramaRepository;
 
-    @Mock
-    private SearchPanoramaRepository searchPanoramaRepository;
-
     @Captor
     private ArgumentCaptor<Panorama> captor;
 
@@ -107,7 +104,6 @@ public class PanoramaServiceTest {
     public void setup() {
         panoramaService = new PanoramaService(
                 panoramaRepository,
-                searchPanoramaRepository,
                 "This is VR SaaS salt"
         );
 
@@ -138,43 +134,6 @@ public class PanoramaServiceTest {
         assertEquals("场景", panorama.getScenes().get(0).getName());
         assertNotNull(panorama.getScenes().get(0).getPhotos());
         assertEquals(new Hashids("This is VR SaaS salt", 7).encode(panorama.getId()), panorama.getPanoramaUrl());
-    }
-
-    @Test
-    public void should_find_all_panoramas_by_page_and_size() {
-        Mockito.when(panoramaRepository.findByPage(anyInt(), anyInt())).thenReturn(asList(benzPano, bmwPano));
-        Mockito.when(panoramaRepository.countByPage()).thenReturn(2L);
-        PanoramaService.PanoramaSearchResult result = panoramaService.searchPanoramas("", 0, 1);
-        assertNotNull(result);
-
-        assertEquals(2, result.getCount().intValue());
-        assertEquals(2, result.getPanoramas().size());
-        assertEquals(bmwPano.getName(), result.getPanoramas().get(1).getName());
-        assertEquals(benzPano.getPanoramaUrl(), result.getPanoramas().get(0).getPanoramaUrl());
-    }
-
-    @Test
-    public void should_search_panorama_by_name() {
-        Mockito.when(searchPanoramaRepository.findAllByNameAndIsDeletedFalse(anyString(), anyInt(), anyInt()))
-                .thenReturn(new PanoramaService.PanoramaSearchResult(1L, Collections.singletonList(bmwPano)));
-        PanoramaService.PanoramaSearchResult result = panoramaService.searchPanoramas("bmw", 1, 1);
-        assertNotNull(result);
-        assertEquals(1, result.getCount().intValue());
-        assertEquals(1, result.getPanoramas().size());
-        assertEquals(bmwPano.getName(), result.getPanoramas().get(0).getName());
-        assertEquals(bmwPano.getPanoramaUrl(), result.getPanoramas().get(0).getPanoramaUrl());
-    }
-
-    @Test
-    public void should_get_panorama_by_url() {
-        Mockito.when(panoramaRepository.findOneByUrl(benzPano.getPanoramaUrl())).thenReturn(Collections.singletonList(benzPano));
-        Panorama result = panoramaService.get(benzPano.getPanoramaUrl());
-        assertNotNull(result);
-        assertEquals(benzPano.getName(), result.getName());
-        assertEquals(benzPano.getId(), result.getId());
-        assertEquals(benzPano.getPanoramaUrl(), result.getPanoramaUrl());
-        assertEquals(2, benzPano.getScenes().size());
-        assertEquals(6, benzPano.getScenes().get(0).getPhotos().size());
     }
 
     @Test
