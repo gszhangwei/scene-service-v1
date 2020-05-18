@@ -1,7 +1,7 @@
 package com.scene.application;
 
-import com.scene.domain.panorama.PanoramaRepository;
 import com.scene.domain.panorama.Panorama;
+import com.scene.domain.panorama.PanoramaRepository;
 import com.scene.domain.panorama.PanoramaService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
