@@ -37,8 +37,8 @@ azure:
     account-name: panoramaproddiag
     account-key: xxxxxx
 
-static-file:
-  static-file-type-limit:
+file-type:
+  whitelist:
     - image/jpeg
     - image/jpg
     - image/bmp

@@ -1,24 +1,20 @@
 package com.scene.application;
 
+import com.scene.domain.file.File;
+import com.scene.domain.file.FileRepo;
+import com.scene.domain.file.FileService;
 import com.scene.domain.file.FileTypeRepo;
-import com.scene.domain.file.StorageClient;
-import com.scene.domain.file.StaticFileService;
-import org.apache.tika.mime.MimeTypeException;
 import org.springframework.stereotype.Service;
 
 @Service
 public class FileApplicationService implements ApplicationService {
-    private final StorageClient storageClient;
-    private final FileTypeRepo fileTypeRepo;
-    private final StaticFileService staticFileService;
+    private final FileService fileService;
 
-    public FileApplicationService(StorageClient storageClient, FileTypeRepo fileTypeRepo) {
-        this.storageClient = storageClient;
-        this.fileTypeRepo = fileTypeRepo;
-        this.staticFileService = new StaticFileService(storageClient, fileTypeRepo);
+    public FileApplicationService(FileRepo fileRepo, FileTypeRepo fileTypeRepo) {
+        this.fileService = new FileService(fileRepo, fileTypeRepo);
     }
 
-    public StaticFileService.UploadFileResult uploadFile(byte[] data) throws MimeTypeException {
-        return staticFileService.uploadFile(data);
+    public File upload(byte[] data) {
+        return fileService.upload(data);
     }
 }

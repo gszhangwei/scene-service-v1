@@ -7,5 +7,5 @@ import java.util.List;
 
 @Component
 public interface FileTypeRepo extends Repository {
-    public List<String> getWhitelist();
+    List<String> getWhitelist();
 }

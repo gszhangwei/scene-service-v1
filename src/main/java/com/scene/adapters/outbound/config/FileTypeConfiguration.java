@@ -9,14 +9,11 @@ import java.util.List;
 @Configuration
 public class FileTypeConfiguration implements FileTypeRepo {
 
-    private final List<String> staticFileTypeLimit;
-
-    public FileTypeConfiguration(@Value("${static-file.static-file-type-limit}") List<String> staticFileTypeLimit) {
-        this.staticFileTypeLimit = staticFileTypeLimit;
-    }
+    @Value("${file-type.whitelist}")
+    private List<String> whitelist;
 
     @Override
     public List<String> getWhitelist() {
-        return staticFileTypeLimit;
+        return whitelist;
     }
 }
