@@ -1,16 +1,13 @@
 package com.scene.domain.panorama;
 
 import com.scene.domain.core.DomainService;
+import java.util.List;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hashids.Hashids;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Objects;
-
-@Service
 @AllArgsConstructor
 public class PanoramaService implements DomainService {
 
