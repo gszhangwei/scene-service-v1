@@ -13,12 +13,16 @@ public final class FileService implements DomainService {
     private final FileTypeRepo fileTypeRepo;
 
     public File upload(byte[] data) {
+        verifyFileType(data);
+        File file = new File(UUID.randomUUID(), data);
+        fileRepo.save(file);
+        return file;
+    }
+
+    private void verifyFileType(byte[] data) {
         String fileType = new Tika().detect(data);
         if (!fileTypeRepo.getWhitelist().contains(fileType)) {
             throw new InvalidFileTypeException();
         }
-        File file = new File(UUID.randomUUID(), data);
-        fileRepo.save(file);
-        return file;
     }
 }
