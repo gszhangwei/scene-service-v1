@@ -1,4 +1,4 @@
 package com.scene.domain.core;
 
-public interface AggregateRoot extends Entity {
+public abstract class AggregateRoot<T> extends Entity<T> {
 }

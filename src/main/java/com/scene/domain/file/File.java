@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public final class File implements AggregateRoot {
+public final class File extends AggregateRoot<UUID> {
     private UUID id;
     private byte[] data;
 }

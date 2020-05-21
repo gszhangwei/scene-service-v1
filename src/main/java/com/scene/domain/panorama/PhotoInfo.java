@@ -8,7 +8,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class PhotoInfo implements Entity {
+public class PhotoInfo extends Entity<Long> {
+    @Override
+    public Long getId() {
+        return 0L;
+    }
     private String photoUrl;
     private boolean isInitialShow;
 }

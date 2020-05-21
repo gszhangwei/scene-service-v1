@@ -11,7 +11,7 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Scene implements Entity {
+public class Scene extends Entity<Long> {
     private Long id;
     private Long panoramaId;
     private String name;

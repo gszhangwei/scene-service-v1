@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Panorama implements AggregateRoot {
+public class Panorama extends AggregateRoot<Long> {
     private Long id;
     private String name;
     private List<Scene> scenes;
