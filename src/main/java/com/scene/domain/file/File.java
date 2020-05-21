@@ -3,10 +3,10 @@ package com.scene.domain.file;
 import com.scene.domain.core.AggregateRoot;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 
-@Data
 @AllArgsConstructor
+@Getter
 public final class File extends AggregateRoot<UUID> {
     private UUID id;
     private byte[] data;
