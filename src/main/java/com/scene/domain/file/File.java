@@ -9,5 +9,5 @@ import lombok.Getter;
 @Getter
 public final class File extends AggregateRoot<UUID> {
     private UUID id;
-    private byte[] data;
+    private byte[] content;
 }

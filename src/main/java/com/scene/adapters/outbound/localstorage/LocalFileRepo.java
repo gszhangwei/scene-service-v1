@@ -14,7 +14,7 @@ public class LocalFileRepo implements FileRepo {
     public void save(File file) {
         try {
             FileOutputStream outputStream = new FileOutputStream(new java.io.File(file.getId().toString()));
-            outputStream.write(file.getData());
+            outputStream.write(file.getContent());
             outputStream.close();
         } catch (IOException e) {
             e.printStackTrace();

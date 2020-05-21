@@ -45,7 +45,7 @@ public class FileServiceTests {
 
         Mockito.verify(fileRepo).save(file);
         assertNotNull(file.getId());
-        assertThat(file.getData(), is(data));
+        assertThat(file.getContent(), is(data));
     }
 
     @Test(expected = InvalidFileTypeException.class)
