@@ -1,32 +1,18 @@
 package com.scene.domain.panorama;
 
-import static java.util.Collections.emptyList;
+import com.scene.domain.core.Builder;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class PanoramaBuilder {
-    private String name;
-    private List<Scene> scenes;
+public abstract class PanoramaBuilder implements Builder<Panorama> {
+    abstract String getName();
+    abstract List<SceneBuilder> getSceneBuilders();
 
-    public static PanoramaBuilder panoramaBuilder() {
-        return new PanoramaBuilder();
-    }
-
-    private PanoramaBuilder() {
-        this.scenes = emptyList();
-    }
-
-    public PanoramaBuilder withName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public PanoramaBuilder withScene(Scene scene) {
-        this.scenes.add(scene);
-        return this;
-    }
-
+    @Override
     public Panorama build() {
-        return new Panorama(name, scenes);
+        return new Panorama(
+                getName(),
+                getSceneBuilders().stream().map(SceneBuilder::build).collect(Collectors.toList())
+        );
     }
 }
-

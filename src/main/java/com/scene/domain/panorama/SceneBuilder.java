@@ -1,43 +1,23 @@
 package com.scene.domain.panorama;
 
-import static java.util.Collections.emptyMap;
+import com.scene.domain.core.Builder;
 import java.util.Map;
+import java.util.stream.Collectors;
 
-public class SceneBuilder {
-    private String name;
-    private SceneType type;
-    private Boolean isDefault;
-    private Map<String, Photo> photos;
+public abstract class SceneBuilder implements Builder<Scene> {
+    abstract String getName();
+    abstract SceneType getType();
+    abstract Boolean isDefault();
+    abstract Map<String, PhotoBuilder> getPhotoBuilders();
 
-    public static SceneBuilder sceneBuilder() {
-        return new SceneBuilder();
-    }
-
-    private SceneBuilder() {
-        this.photos = emptyMap();
-    }
-
-    public SceneBuilder withName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public SceneBuilder withType(SceneType type) {
-        this.type = type;
-        return this;
-    }
-
-    public SceneBuilder isDefault(Boolean isDefault) {
-        this.isDefault = isDefault;
-        return this;
-    }
-
-    public SceneBuilder withPhoto(String key, Photo photo) {
-        this.photos.put(key, photo);
-        return this;
-    }
-
+    @Override
     public Scene build() {
-        return new Scene(name, type, isDefault, photos);
+        return new Scene(
+                getName(),
+                getType(),
+                isDefault(),
+                getPhotoBuilders().entrySet().stream()
+                        .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().build()))
+        );
     }
 }
