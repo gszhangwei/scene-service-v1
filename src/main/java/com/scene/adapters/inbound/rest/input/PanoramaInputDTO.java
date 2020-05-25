@@ -1,9 +1,10 @@
 package com.scene.adapters.inbound.rest.input;
 
 import com.scene.domain.panorama.Panorama;
-import com.scene.domain.panorama.PhotoInfo;
+import com.scene.domain.panorama.Photo;
 import com.scene.domain.panorama.Scene;
 import com.scene.domain.panorama.SceneType;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -31,8 +31,7 @@ public class PanoramaInputDTO {
     private List<SceneInputDTO> scenes;
 
     public final Panorama toDomainObject() {
-        Date currentDate = new Date();
-        return new Panorama(null, name, scenes.stream().map(SceneInputDTO::toDomainObject).collect(toList()), false, null, currentDate, currentDate);
+        return new Panorama(name, scenes.stream().map(SceneInputDTO::toDomainObject).collect(toList()));
     }
 
     @AllArgsConstructor
@@ -48,10 +47,9 @@ public class PanoramaInputDTO {
         @NotEmpty( message = "请上传图片")
         private Map<String, PhotoInputDTO> photos;
 
-        public final Scene toDomainObject() {
-            Map<String, PhotoInfo> photoInfoMap = photos.entrySet().stream().collect(toMap(Map.Entry::getKey, photoMap -> photoMap.getValue().toDomainObject()));
-            Date currentTime = new Date();
-            return new Scene(null, null, name, type, isInitialShow, false, photoInfoMap, currentTime, currentTime);
+        final Scene toDomainObject() {
+            Map<String, Photo> photoInfoMap = photos.entrySet().stream().collect(toMap(Map.Entry::getKey, photoMap -> photoMap.getValue().toDomainObject()));
+            return new Scene(null, name, type, isInitialShow, photoInfoMap);
         }
     }
 
@@ -60,12 +58,12 @@ public class PanoramaInputDTO {
     @Data
     public static class PhotoInputDTO {
         @NotNull
-        private String photoUrl;
+        private UUID fileId;
         private boolean isInitialShow;
 
         @NotNull
-        public final PhotoInfo toDomainObject() {
-            return new PhotoInfo(this.photoUrl, this.isInitialShow);
+        final Photo toDomainObject() {
+            return new Photo(this.fileId, this.isInitialShow);
         }
 
     }

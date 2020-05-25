@@ -1,43 +1,32 @@
 package com.scene.domain.panorama;
 
 import com.scene.domain.core.AggregateRoot;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.experimental.Wither;
 
 @AllArgsConstructor
-@NoArgsConstructor
-@Data
+@Getter
 public class Panorama extends AggregateRoot<Long> {
+    @Wither
     private Long id;
     private String name;
     private List<Scene> scenes;
+    @Wither
+    private String shortUrl;
     private Boolean isDeleted;
-    private String panoramaUrl;
     private Date createTime;
     private Date updateTime;
 
-    Panorama update(Panorama updatedPanorama) {
+    public Panorama(String name, List<Scene> scenes) {
+        this.name = name;
+        this.scenes = scenes;
+        this.isDeleted = false;
         Date now = Date.from(Instant.now());
-        Map<Long, Scene> originSceneMap = scenes.stream().collect(Collectors.toMap(Scene::getId, Function.identity()));
-        Map<Long, Scene> updatingSceneMaps = updatedPanorama.scenes.stream().collect(Collectors.toMap(Scene::getId, Function.identity()));
-        List<Scene> newAndUpdatedSceneList = updatedPanorama.getScenes()
-                .stream()
-                .map(scene -> originSceneMap.containsKey(scene.getId()) ? originSceneMap.get(scene.getId()).update(scene, now) : scene)
-                .collect(Collectors.toList());
-        List<Scene> deletedSceneList = originSceneMap.values()
-                .stream()
-                .filter(scene -> !updatingSceneMaps.containsKey(scene.getId()))
-                .map(scene -> scene.delete(now))
-                .collect(Collectors.toList());
-        newAndUpdatedSceneList.addAll(deletedSceneList);
-        return new Panorama(id, updatedPanorama.getName(), newAndUpdatedSceneList, isDeleted, panoramaUrl, createTime, now);
+        this.createTime = now;
+        this.updateTime = now;
     }
 }

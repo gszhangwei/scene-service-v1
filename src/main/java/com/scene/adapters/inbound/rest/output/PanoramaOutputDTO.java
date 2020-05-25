@@ -20,6 +20,6 @@ public class PanoramaOutputDTO {
 
     public static PanoramaOutputDTO of(Panorama panorama, String urlPrefix){
         return new PanoramaOutputDTO(panorama.getId(), panorama.getName(), panorama.getIsDeleted(),
-                urlPrefix + panorama.getPanoramaUrl(), panorama.getCreateTime(), panorama.getUpdateTime());
+                urlPrefix + panorama.getShortUrl(), panorama.getCreateTime(), panorama.getUpdateTime());
     }
 }

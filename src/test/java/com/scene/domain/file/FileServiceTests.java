@@ -22,7 +22,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class FileServiceTests {
 
-    private static final String TEST_FILE_PATH = "/test-fixtures/1.jpeg";
     private byte[] data;
     @Mock
     private FileRepo fileRepo;

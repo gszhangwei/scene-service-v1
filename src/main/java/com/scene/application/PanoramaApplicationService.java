@@ -21,12 +21,4 @@ public class PanoramaApplicationService {
         return this.panoramaService.createPanorama(panorama);
     }
 
-    public void deletePanorama(long panoramaId) {
-        this.panoramaService.deletePanorama(panoramaId);
-    }
-
-    public String updatePanorama(long panoramaId, Panorama updatedPanorama) {
-        return this.panoramaService.updatePanorama(panoramaId, updatedPanorama);
-    }
-
 }

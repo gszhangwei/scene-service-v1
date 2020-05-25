@@ -5,10 +5,6 @@ import com.scene.domain.panorama.Panorama;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
 @Repository
 public class PanoramaRepoImpl implements PanoramaRepository {
 
@@ -23,8 +19,4 @@ public class PanoramaRepoImpl implements PanoramaRepository {
         return panoramaJpaRepo.save(PanoramaPO.of(panorama)).toDomainObject();
     }
 
-    @Override
-    public Panorama findById(long id) {
-        return Objects.requireNonNull(panoramaJpaRepo.findById(id).orElse(null)).toDomainObject();
-    }
 }

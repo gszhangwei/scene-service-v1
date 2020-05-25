@@ -43,37 +43,20 @@ public class ScenePO implements IPersistenceObject<Scene> {
     @Nullable
     private Boolean isInitialShow;
 
-    @Column(name = "is_deleted")
-    @Nullable
-    private Boolean isDeleted;
-
     @Column(name = "photos")
     @Convert(converter = MapConverter.class)
     @Nullable
     private Map photos;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "create_time")
-    @Nullable
-    private Date createTime;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "update_time")
-    @Nullable
-    private Date updateTime;
-
-
-    public static ScenePO of(Scene scene) {
+    public static ScenePO of(Scene scene, Long panoramaId) {
         return new ScenePO(
                 scene.getId(),
-                scene.getPanoramaId(),
+                panoramaId,
                 scene.getName(),
                 scene.getType(),
-                scene.getIsInitialShow(),
-                scene.getIsDeleted(),
-                scene.getPhotos(),
-                scene.getCreateTime(),
-                scene.getUpdateTime()
+                scene.getIsDefault(),
+                scene.getPhotos()
         );
     }
 
@@ -81,14 +64,10 @@ public class ScenePO implements IPersistenceObject<Scene> {
     public Scene toDomainObject() {
         return new Scene(
                 this.getId(),
-                this.getPanoramaId(),
                 this.getName(),
                 this.getType(),
                 this.getIsInitialShow(),
-                this.getIsDeleted(),
-                this.getPhotos(),
-                this.getCreateTime(),
-                this.getUpdateTime()
+                this.getPhotos()
         );
     }
 }

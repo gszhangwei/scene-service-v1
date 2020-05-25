@@ -63,10 +63,10 @@ public class PanoramaPO implements IPersistenceObject<Panorama> {
                 panorama.getName(),
                 panorama.getScenes()
                         .stream()
-                        .map(ScenePO::of)
+                        .map(s -> ScenePO.of(s, panorama.getId()))
                         .collect(toList()),
                 panorama.getIsDeleted(),
-                panorama.getPanoramaUrl(),
+                panorama.getShortUrl(),
                 panorama.getCreateTime(),
                 panorama.getUpdateTime()
         );
