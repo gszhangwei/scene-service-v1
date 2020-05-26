@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class PanoramaBuilder implements Builder<Panorama> {
-    abstract String getName();
-    abstract List<SceneBuilder> getSceneBuilders();
+    public abstract String getName();
+    public abstract List<? extends SceneBuilder> getSceneBuilders();
 
     @Override
     public Panorama build() {

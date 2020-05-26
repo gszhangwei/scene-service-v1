@@ -4,8 +4,8 @@ import com.scene.domain.core.Builder;
 import java.util.UUID;
 
 public abstract class PhotoBuilder implements Builder<Photo> {
-    abstract UUID getFileId();
-    abstract Boolean isDefault();
+    public abstract UUID getFileId();
+    public abstract Boolean isDefault();
 
     @Override
     public Photo build() {

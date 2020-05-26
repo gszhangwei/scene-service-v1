@@ -5,10 +5,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public abstract class SceneBuilder implements Builder<Scene> {
-    abstract String getName();
-    abstract SceneType getType();
-    abstract Boolean isDefault();
-    abstract Map<String, PhotoBuilder> getPhotoBuilders();
+    public abstract String getName();
+    public abstract SceneType getType();
+    public abstract Boolean isDefault();
+    public abstract Map<String, ? extends PhotoBuilder> getPhotoBuilders();
 
     @Override
     public Scene build() {

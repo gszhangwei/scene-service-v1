@@ -1,6 +1,7 @@
 package com.scene.application;
 
 import com.scene.domain.panorama.Panorama;
+import com.scene.domain.panorama.PanoramaBuilder;
 import com.scene.domain.panorama.PanoramaRepository;
 import com.scene.domain.panorama.PanoramaService;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,8 +18,8 @@ public class PanoramaApplicationService {
     }
 
     @Transactional
-    public String createPanorama(Panorama panorama) {
-        return this.panoramaService.createPanorama(panorama);
+    public String create(PanoramaBuilder panoramaBuilder) {
+        return this.panoramaService.create(panoramaBuilder);
     }
 
 }

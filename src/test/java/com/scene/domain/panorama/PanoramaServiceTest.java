@@ -55,7 +55,7 @@ public class PanoramaServiceTest {
         PanoramaInputDTO.SceneInputDTO sceneInputDTO = new PanoramaInputDTO.SceneInputDTO("场景", SceneType.ENVIRONMENT, true, ImmutableMap.of("0度", photoInputDTO));
 
         PanoramaInputDTO panoramaInputDTO = new PanoramaInputDTO("全景", Collections.singletonList(sceneInputDTO));
-        String createPanorama = panoramaService.createPanorama(panoramaInputDTO.toDomainObject());
+        String createPanorama = panoramaService.create(panoramaInputDTO);
         Mockito.verify(panoramaRepository, times(2)).save(captor.capture());
         Panorama panorama = captor.getValue();
         assertNotNull(createPanorama);

@@ -13,13 +13,12 @@ public class PanoramaService implements DomainService {
 
     private final String salt;
 
-    public String createPanorama(Panorama panorama) {
-        Panorama savedPanorama = panoramaRepository.save(panorama);
-        Long id = savedPanorama.getId();
-        String panoramaUrl = (new Hashids(this.salt, ID_LENGTH)).encode(id);
-        savedPanorama = savedPanorama.withShortUrl(panoramaUrl);
-        this.panoramaRepository.save(savedPanorama);
-        return panoramaUrl;
+    public String create(PanoramaBuilder panoramaBuilder) {
+        Panorama panorama = panoramaBuilder.build();
+        panorama = panoramaRepository.save(panorama);
+        panorama = panorama.withShortUrl(new Hashids(this.salt, ID_LENGTH).encode(panorama.getId()));
+        panoramaRepository.save(panorama);
+        return panorama.getShortUrl();
     }
 
 }
